@@ -1,0 +1,13 @@
+MobTest1:
+    Type: 16
+    Name: Noob
+    Drops:
+        - DropTest1
+MobTest2:
+    Type: 42
+    Name: Baba
+    Drops:
+        - DropTest1
+MobTest3:
+    Type: 43
+    Name: "Ali"

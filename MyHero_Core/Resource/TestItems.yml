@@ -1,0 +1,18 @@
+ItemTest:
+ ID: 35
+ Data: 8
+ displayname: '&7Super wool'
+ lore:
+  - "&6I am super"
+  - '&6wooool!!!'
+ enchant:
+   - '2'
+   - '3:5'
+ amount: 10
+ItemTest2:
+ ID: 301
+ displayname: '&4Super boots'
+ color: 13
+ enchant:
+   - '0:3'
+   - '1:3'

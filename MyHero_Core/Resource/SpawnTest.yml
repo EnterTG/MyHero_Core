@@ -3,7 +3,17 @@ Test1:
     Y1: 2960
     X2: 2483
     Y2: 3103
+    MaxMobs: 100
+    SpawnMinMobs: 3
+    SpawnMaxMobs: 6
     World: "world"
     Mobs:
      - MobTest1:1
      - MobTest2:2
+Test2:
+    Location: 0 0 0
+    World: "world"
+    MaxMobs: 1
+    Chance: 0.3
+    Mobs:
+     - MobTest1:1

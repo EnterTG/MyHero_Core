@@ -1,7 +1,7 @@
 #name, main, version and api are required
 name: MyHero
 main: MyHero_Core.Core.MyHeroMain
-version: "0.1"
+version: "1.1"
 api: ["1.0.5"]
 author: WindSkill
 description: Plugin MyHero Core for Nukkit

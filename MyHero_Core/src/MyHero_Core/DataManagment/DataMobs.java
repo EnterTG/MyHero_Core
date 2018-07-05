@@ -11,13 +11,13 @@ import MyHero_Mobs.DropManager.Drop;
 import MyHero_Mobs.DropManager.DropManager;
 import MyHero_Mobs.MobManager.EntityInterface;
 import MyHero_Mobs.MobManager.MobManager;
-import MyHero_Mobs.MobManager.MobOption;
 import MyHero_Mobs.MobManager.MobOptionManager;
 import MyHero_Mobs.MobManager.MobsType;
 import MyHero_Mobs.MobManager.MyHeroMobCreator;
 import MyHero_Mobs.MobManager.OptionInterface;
 import MyHero_Mobs.SpawningManager.Spawner;
 import MyHero_Mobs.SpawningManager.SpawningManager;
+import cn.nukkit.entity.Entity;
 
 public class DataMobs extends DataTemplate{
 
@@ -30,10 +30,10 @@ public class DataMobs extends DataTemplate{
 	private HashMap<String,Drop> AllDrops;// = new HashMap<>();
 	private List<Spawner> AllSpawners;// = new ArrayList<Spawner>();
 	private HashMap<String,OptionInterface> AllMobOptions;// = new HashMap<String,OptionInterface>();
-	private HashMap<String,MobOption> AllMobs;
+	private HashMap<String,MyHeroMobCreator> AllMobs;
 	private HashMap<MobsType,EntityInterface> MobsList;
-	private HashMap<Long,MyHeroMobCreator> AllSpawnedMobs;
-	
+	private HashMap<Long,Entity> AllSpawnedMobs;
+	private HashMap<Long,MyHeroMobCreator> AllSpawnedMobsCreators;
 	@Override
 	public void Start() {
 
@@ -45,6 +45,7 @@ public class DataMobs extends DataTemplate{
 				AllDrops = new HashMap<>();
 				DropManager.Load();
 			}
+			AllSpawnedMobsCreators= new HashMap<>();
 			AllSpawnedMobs = new HashMap<>();
 			AllSpawners = new ArrayList<Spawner>();
 			AllMobOptions = new HashMap<>();
@@ -55,7 +56,7 @@ public class DataMobs extends DataTemplate{
 			MobOptionManager.Load();
 			MobManager.Load();
 			SpawningManager.Load();
-
+			AllSpawners.forEach((s) ->{s.Spawn();});
 		}
 	}
 	
@@ -69,12 +70,14 @@ public class DataMobs extends DataTemplate{
 	public void ClearData()
 	{
 		if(data.MyHeroItems) AllDrops.clear();
+		AllSpawnedMobs.forEach( (l,e) -> {if(e.isAlive())e.kill();});
 		AllSpawnedMobs.clear();
+		AllSpawners.forEach((s) -> {s.Stop();});
 		AllSpawners.clear();
 		AllMobOptions.clear();
 		AllMobs.clear();
 		MobsList.clear();
-		
+		AllSpawnedMobsCreators.clear();
 	}
 	
 	//Drops
@@ -106,11 +109,14 @@ public class DataMobs extends DataTemplate{
 	{
 		return AllMobOptions.get(optionName);
 	}
-	public void addMob(String MobName,MobOption mob)
+	
+	
+	
+	public void addMob(String MobName,MyHeroMobCreator mob)
 	{
 		AllMobs.put(MobName, mob);
 	}
-	public MobOption getMob(String mobName)
+	public MyHeroMobCreator getMob(String mobName)
 	{
 		return AllMobs.get(mobName);
 	}
@@ -119,10 +125,13 @@ public class DataMobs extends DataTemplate{
 		return AllMobs.containsKey(mobName);
 	}
 	
+	
+	
 	public List<String> getAllMobsNames()
 	{
 		return new ArrayList<String>(AllMobs.keySet());
 	}
+	
 	
 	
 	public boolean isMyHeroMob(Long mobid)
@@ -131,12 +140,10 @@ public class DataMobs extends DataTemplate{
 	}
 	public MyHeroMobCreator getMyHeroMobInstance(Long mobid)
 	{
-		return AllSpawnedMobs.get(mobid);
+		return AllSpawnedMobsCreators.get(mobid);
 	}
-	public void addNewSpawnedMyHeroMob(Long mobid,MyHeroMobCreator instance)
-	{
-		AllSpawnedMobs.put(mobid, instance);
-	}
+
+	
 	
 	public void addMobType(MobsType mobtype,EntityInterface entityinterface)
 	{
@@ -147,6 +154,26 @@ public class DataMobs extends DataTemplate{
 		return MobsList.get(mobtype);
 	}
 	//Spawners
+	
+	public void addNewSpawnedMyHeroMobCreator(Long mobid,MyHeroMobCreator instance)
+	{
+		AllSpawnedMobsCreators.put(mobid, instance);
+	}
+	
+	public void addNewSpawnedMyHeroMob(Long mobid,Entity instance)
+	{
+		AllSpawnedMobs.put(mobid, instance);
+	}
+	
+	public void removeSpawnedMyHeroMob(Long mobid)
+	{
+		Entity e = AllSpawnedMobs.get(mobid);
+		AllSpawners.forEach( (s) -> {s.MobDie(e);});
+		AllSpawnedMobs.remove(mobid);
+		AllSpawnedMobsCreators.remove(mobid);
+	}
+	
+	
 	
 	public void addSpawner(Spawner spawner)
 	{

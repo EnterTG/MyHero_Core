@@ -1,5 +1,6 @@
 DropTest1:
-    MinDrop: 10
+    MinDrop: 1
+    MaxDrop: 3
     DropChance: 0.1
     Drop: 
         - ItemTest 0.1 1 10

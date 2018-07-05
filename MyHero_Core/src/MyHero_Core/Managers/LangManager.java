@@ -30,6 +30,7 @@ public class LangManager
 			Item_Error= "%Item_Name% contains error",
 			Item_Amount_Is_Not_Int = "Item amount is not number",
 			Mob_HP_Is_Not_Int = "Mob hp is not number",
+			Mob_Damage_Is_Not_Int = "Mob damage is not number",
 			Item_Do_Not_Exist = "%Item_Name% not exist",
 			Mob_not_exist = "%Mob_Name%  do not exist",
 			Drop_Error= "Error in drop %Drop_Name%",

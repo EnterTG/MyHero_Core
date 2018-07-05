@@ -135,6 +135,22 @@ public class MyHeroMain extends PluginBase implements Listener{
 				case "reload":
 					MyHeroData.RestartMyHero();
 					break;
+				/*case "test":
+					
+					for(Entity e : getServer().getPlayer("WindSkullX").getLevel().getEntities())
+					{
+						MobEquipmentPacket pk = new MobEquipmentPacket();
+						pk.eid = e.getId();
+						pk.item = new ItemBow();
+						pk.hotbarSlot = 0;
+						pk.windowId = -1;
+						getServer().getPlayer("WindSkullX").dataPacket(pk);
+						getServer().getPlayer("WindSkullX").sendMessage("N: " + e.getName() + "  " + e.getId());
+					}
+					*/
+					
+					
+					
 			}
 		return true;
 	}

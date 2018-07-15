@@ -21,7 +21,7 @@ public class DataItemsAtribute extends DataTemplate{
 	
 	private HashMap<UUID,MyHeroPlayerItemAtributes> PlayersData = new HashMap<>();
 	
-	private HashMap<String,AtributeGetterInterface> AllAtributesCreators= new HashMap<>(); 
+	private LinkedHashMap<String,AtributeGetterInterface> AllAtributesCreators= new LinkedHashMap<>(); 
 	
 	
 	

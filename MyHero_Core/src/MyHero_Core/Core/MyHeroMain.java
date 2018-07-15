@@ -1,6 +1,8 @@
 package MyHero_Core.Core;
 
 import MyHero_Core.Managers.LangManager;
+import MyHero_Levels.API.MyHeroLevel;
+import MyHero_Levels.Core.MyHeroLevelsMain;
 import cn.nukkit.Player;
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
@@ -9,13 +11,16 @@ import cn.nukkit.plugin.PluginBase;
 
 public class MyHeroMain extends PluginBase implements Listener{
 
-	private static Data MyHeroData = new Data();
+	private static Data MyHeroData = new Data();;
 	private static MyHeroMain MainClass;
+	
 	@Override
 	public void onEnable()
 	{
 		MainClass = this;
+		MyHeroData.InitData();
 		this.getServer().getPluginManager().registerEvents(this,this);
+		
 	}
 	@Override
 	public void onDisable()
@@ -135,19 +140,125 @@ public class MyHeroMain extends PluginBase implements Listener{
 				case "reload":
 					MyHeroData.RestartMyHero();
 					break;
-				/*case "test":
-					
-					for(Entity e : getServer().getPlayer("WindSkullX").getLevel().getEntities())
+				case "exp":
+					if(args.length > 2 && MyHeroMain.getMyHeroData().MyHeroLevels)
 					{
-						MobEquipmentPacket pk = new MobEquipmentPacket();
-						pk.eid = e.getId();
-						pk.item = new ItemBow();
-						pk.hotbarSlot = 0;
-						pk.windowId = -1;
-						getServer().getPlayer("WindSkullX").dataPacket(pk);
-						getServer().getPlayer("WindSkullX").sendMessage("N: " + e.getName() + "  " + e.getId());
+						Player p = null;
+						
+						if(args.length > 3)
+							p = MyHeroMain.getMain().getServer().getPlayer(args[3]);
+						else
+							if(sender instanceof Player)
+								p = (Player) sender;
+						MyHeroLevel mhl = MyHeroLevelsMain.getAPI().getMyHeroLevel(p);
+						if(mhl == null)
+						{
+							if(sender instanceof Player)
+								sender.sendMessage("Error while executing the command");
+							else
+								LangManager.Log("Error while executing the command");
+							break;
+						}
+						
+						try
+						{
+							switch(args[1].toLowerCase())
+							{
+								case "give":
+									mhl.addExp(Long.parseLong(args[2]));
+									
+									break;
+								case "set":
+									
+									mhl.setPlayerExp(Long.parseLong(args[2]));
+									
+									break;
+								case "substract":
+									mhl.subtractExp(Long.parseLong(args[2]));
+									break;
+								default:
+									if(sender instanceof Player)
+										sender.sendMessage("Error while executing the command");
+									else
+										LangManager.Log("Error while executing the command");
+							}
+						}
+						catch(NumberFormatException e)
+						{
+							if(sender instanceof Player)
+								sender.sendMessage("Error while executing the command");
+							else
+								LangManager.Log("Error while executing the command");
+						}
 					}
-					*/
+					else
+					{
+						if(sender instanceof Player)
+							sender.sendMessage("Error while executing the command");
+						else
+							LangManager.Log("Error while executing the command");
+					}
+					break;
+				case "level":
+					if(args.length > 2 && MyHeroMain.getMyHeroData().MyHeroLevels)
+					{
+						Player p = null;
+						
+						if(args.length > 3)
+							p = MyHeroMain.getMain().getServer().getPlayer(args[3]);
+						else
+							if(sender instanceof Player)
+								p = (Player) sender;
+						MyHeroLevel mhl = MyHeroLevelsMain.getAPI().getMyHeroLevel(p);
+						if(mhl == null)
+						{
+							if(sender instanceof Player)
+								sender.sendMessage("Error while executing the command");
+							else
+								LangManager.Log("Error while executing the command");
+							break;
+						}
+						
+						try
+						{
+							switch(args[1].toLowerCase())
+							{
+								case "give":
+									mhl.addLevel(Integer.parseInt(args[2]));
+									
+									break;
+								case "set":
+									
+									mhl.setPlayerLevel(Integer.parseInt(args[2]));
+									
+									break;
+								case "substract":
+									mhl.subtractLevel(Integer.parseInt(args[2]));
+									break;
+								default:
+									if(sender instanceof Player)
+										sender.sendMessage("Error while executing the command");
+									else
+										LangManager.Log("Error while executing the command");
+							}
+						}
+						catch(NumberFormatException e)
+						{
+							if(sender instanceof Player)
+								sender.sendMessage("Error while executing the command");
+							else
+								LangManager.Log("Error while executing the command");
+						}
+					}
+					else
+					{
+						if(sender instanceof Player)
+							sender.sendMessage("Error while executing the command");
+						else
+							LangManager.Log("Error while executing the command");
+					}
+					break;
+						
 					
 					
 					

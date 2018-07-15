@@ -5,6 +5,8 @@ version: "1.1"
 api: ["1.0.5"]
 author: WindSkill
 description: Plugin MyHero Core for Nukkit
+softdepend: ["DbLib"]
+loadbefore: ["MyHero_Levels","MyHero_Mobs","MyHero_Items"]
 commands:
   MyHero:
     description: MyHero Core

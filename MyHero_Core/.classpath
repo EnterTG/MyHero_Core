@@ -5,5 +5,8 @@
 	<classpathentry kind="lib" path="D:/nukkit/nukkit-1.0-SNAPSHOT.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/MyHero_Items"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/MyHero_Mobs"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/MyHero_Levels"/>
+	<classpathentry kind="lib" path="D:/nukkit/plugins/DbLib.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/MyHero_ItemAtribute"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

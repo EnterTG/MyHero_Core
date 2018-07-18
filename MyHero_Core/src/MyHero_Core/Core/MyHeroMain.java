@@ -1,7 +1,10 @@
 package MyHero_Core.Core;
 
+import java.util.Arrays;
+
 import MyHero_Core.Managers.LangManager;
 import MyHero_Levels.API.MyHeroLevel;
+import MyHero_Levels.API.MyHeroLevelsAPI;
 import MyHero_Levels.Core.MyHeroLevelsMain;
 import cn.nukkit.Player;
 import cn.nukkit.command.Command;
@@ -166,15 +169,20 @@ public class MyHeroMain extends PluginBase implements Listener{
 							{
 								case "give":
 									mhl.addExp(Long.parseLong(args[2]));
-									
+									mhl.updatePlayerView();
 									break;
 								case "set":
 									
 									mhl.setPlayerExp(Long.parseLong(args[2]));
-									
+									mhl.updatePlayerView();
 									break;
 								case "substract":
 									mhl.subtractExp(Long.parseLong(args[2]));
+									mhl.updatePlayerView();
+									break;
+								case "list":
+									MyHeroLevelsAPI api = MyHeroLevelsMain.getAPI();
+									p.sendMessage(Arrays.toString(api.getLevelsTable()));
 									break;
 								default:
 									if(sender instanceof Player)

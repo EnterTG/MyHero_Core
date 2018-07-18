@@ -8,5 +8,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/MyHero_Levels"/>
 	<classpathentry kind="lib" path="D:/nukkit/plugins/DbLib.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/MyHero_ItemAtribute"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/MyHero_Npc"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

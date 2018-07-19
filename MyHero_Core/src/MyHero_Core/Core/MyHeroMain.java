@@ -5,7 +5,7 @@ import java.util.Arrays;
 import MyHero_Core.Managers.LangManager;
 import MyHero_Levels.API.MyHeroLevel;
 import MyHero_Levels.API.MyHeroLevelsAPI;
-import MyHero_Levels.Core.MyHeroLevelsMain;
+import MyHero_Levels.Core.MyHeroMain_Levels;
 import cn.nukkit.Player;
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
@@ -153,7 +153,7 @@ public class MyHeroMain extends PluginBase implements Listener{
 						else
 							if(sender instanceof Player)
 								p = (Player) sender;
-						MyHeroLevel mhl = MyHeroLevelsMain.getAPI().getMyHeroLevel(p);
+						MyHeroLevel mhl = MyHeroMain_Levels.getAPI().getMyHeroLevel(p);
 						if(mhl == null)
 						{
 							if(sender instanceof Player)
@@ -167,6 +167,7 @@ public class MyHeroMain extends PluginBase implements Listener{
 						{
 							switch(args[1].toLowerCase())
 							{
+								case "add":
 								case "give":
 									mhl.addExp(Long.parseLong(args[2]));
 									mhl.updatePlayerView();
@@ -180,10 +181,6 @@ public class MyHeroMain extends PluginBase implements Listener{
 									mhl.subtractExp(Long.parseLong(args[2]));
 									mhl.updatePlayerView();
 									break;
-								case "list":
-									MyHeroLevelsAPI api = MyHeroLevelsMain.getAPI();
-									p.sendMessage(Arrays.toString(api.getLevelsTable()));
-									break;
 								default:
 									if(sender instanceof Player)
 										sender.sendMessage("Error while executing the command");
@@ -193,14 +190,23 @@ public class MyHeroMain extends PluginBase implements Listener{
 						}
 						catch(NumberFormatException e)
 						{
-							if(sender instanceof Player)
-								sender.sendMessage("Error while executing the command");
-							else
-								LangManager.Log("Error while executing the command");
+							switch(args[1].toLowerCase())
+							{
+								case "list":
+									MyHeroLevelsAPI api = MyHeroMain_Levels.getAPI();
+									p.sendMessage(LangManager.Prefix+Arrays.toString(api.getLevelsTable()));
+									break;
+								default:
+									if(sender instanceof Player)
+										sender.sendMessage("Error while executing the command");
+									else
+										LangManager.Log("Error while executing the command");
+							}
 						}
 					}
 					else
 					{
+						
 						if(sender instanceof Player)
 							sender.sendMessage("Error while executing the command");
 						else
@@ -217,7 +223,7 @@ public class MyHeroMain extends PluginBase implements Listener{
 						else
 							if(sender instanceof Player)
 								p = (Player) sender;
-						MyHeroLevel mhl = MyHeroLevelsMain.getAPI().getMyHeroLevel(p);
+						MyHeroLevel mhl = MyHeroMain_Levels.getAPI().getMyHeroLevel(p);
 						if(mhl == null)
 						{
 							if(sender instanceof Player)

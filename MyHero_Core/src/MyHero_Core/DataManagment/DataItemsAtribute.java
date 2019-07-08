@@ -65,4 +65,8 @@ public class DataItemsAtribute extends DataTemplate{
 		return PlayersData.get(p.getUniqueId());
 	}
 	
+	public void removePlayerData(Player p)
+	{
+		PlayersData.remove(p.getUniqueId());
+	}
 }

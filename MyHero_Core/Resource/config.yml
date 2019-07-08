@@ -8,3 +8,13 @@ Default:
  MySqlPass: ""
  MySqlDatabase: "main"
  MySqlPort: 0
+ItemAtributes:
+ UseArmor: true
+ UseArmorPenetration: true
+ UseCrit: true
+ UseDamage: true
+ UseDodge: true
+ UseHealth: true
+ UseLifSteal: true
+ 
+ 

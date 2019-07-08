@@ -41,6 +41,7 @@ public class ConnectionManager {
 				return DbLib.getMySqlConnection(MySQLIP, MYSQLPort, DataBase, MySQLLogin, MySQLPass);
 			else
 				return DbLib.getSQLiteConnection(new File(ResourceManager.getPath(), DataBase+".db"));
+			
 		} catch (Exception e) {
 			//MyHeroLevelsMain.getMainClass().getLogger().info(e);
 			e.printStackTrace();

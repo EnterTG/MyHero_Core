@@ -9,10 +9,9 @@ import MyHero_Levels.Core.MyHeroMain_Levels;
 import cn.nukkit.Player;
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
-import cn.nukkit.event.Listener;
 import cn.nukkit.plugin.PluginBase;
 
-public class MyHeroMain extends PluginBase implements Listener{
+public class MyHeroMain extends PluginBase{
 
 	private static Data MyHeroData = new Data();;
 	private static MyHeroMain MainClass;
@@ -22,8 +21,7 @@ public class MyHeroMain extends PluginBase implements Listener{
 	{
 		MainClass = this;
 		MyHeroData.InitData();
-		this.getServer().getPluginManager().registerEvents(this,this);
-		
+		//this.getServer().getPluginManager().registerEvents(this,this);
 	}
 	@Override
 	public void onDisable()
@@ -40,6 +38,7 @@ public class MyHeroMain extends PluginBase implements Listener{
 	{
 		return MainClass;
 	}
+	
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
 	{
@@ -272,10 +271,8 @@ public class MyHeroMain extends PluginBase implements Listener{
 							LangManager.Log("Error while executing the command");
 					}
 					break;
-						
-					
-					
-					
+				case "npc":
+					return true;
 			}
 		return true;
 	}

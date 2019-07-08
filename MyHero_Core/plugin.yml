@@ -1,19 +1,22 @@
 #name, main, version and api are required
 name: MyHero
 main: MyHero_Core.Core.MyHeroMain
-version: "1.2"
-api: ["1.0.5"]
+version: "1.22"
+api: ["1.0.8"]
 author: WindSkill
 description: Plugin MyHero Core for Nukkit
-softdepend: ["DbLib"]
+softdepend: ["DbLib",]
 loadbefore: ["MyHero_Levels","MyHero_Mobs","MyHero_Items"]
+load: STARTUP
+
 commands:
-  MyHero:
-    description: MyHero Core
-    aliases: [mh]
-    permission: MyHeroItems.admin
-    permission-message: "You do not have the required permission to run /mh"
+ myhero:
+  description: MyHero Core
+  aliases: [mh]
+  permission: myhero.admin
+  permission-message: "You do not have the required permission to run /mh"
+
 permissions:
-  MyHero.admin:
-    description: "Allows the user to run the admin commands"
-    default: false
+ myhero.admin:
+  description: "Allows the user to run the admin commands"
+  default: op
